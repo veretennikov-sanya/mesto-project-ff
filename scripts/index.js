@@ -5,24 +5,21 @@ const cardTemplate = document.querySelector('#card-template').content;
 const cards = document.querySelector('.places__list');
  
 // @todo: Функция создания карточки
-function generateNewCard(card, btnDelete) {
+function generateNewCard(card, deleteBtn) {
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('.card__title').textContent = card.name;
     cardElement.querySelector('.card__image').src = card.link;
-    cardElement.querySelector('.card__delete-button').addEventListener('click', (evt) => {btnDelete(evt);
+    cardElement.querySelector('.card__image').alt = 'Природа России';
+    cardElement.querySelector('.card__delete-button').addEventListener('click', (evt) => {deleteBtn(evt);
     });
     return cardElement;
 }
  
 // @todo: Функция удаления карточки
-function deleteCard() {
-    const card = document.querySelectorAll('.card');
-    for (let i = 0; i < card.length; i++) {
-      card[i].addEventListener('click', function() {
-        this.remove();
-      });
-    }
-  }
+function deleteCard(event) {
+    const card = event.target.closest(".card");
+    card.remove();
+}
   
 // @todo: Вывести карточки на страницу
 const outputCards = initialCards.map((card) => generateNewCard(card, deleteCard));
