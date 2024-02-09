@@ -1,14 +1,14 @@
 // @todo: Функция создания карточки
 const cardTemplate = document.querySelector("#card-template").content;
 
-export function generateNewCard(card, deleteBtn, likeAnimation, popupImg) {
+export function generateNewCard(card, deleteBtn, likeAnimation, openPopupImg) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImg = cardElement.querySelector(".card__image");
   const likeBtn = cardElement.querySelector(".card__like-button");
   likeBtn.addEventListener("click", () => likeAnimation(likeBtn));
   cardImg.src = card.link;
   cardImg.alt = card.name;
-  cardImg.addEventListener("click", () => popupImg(card));
+  cardImg.addEventListener("click", () => openPopupImg(card));
   cardElement.querySelector(".card__title").textContent = card.name;
   cardElement
     .querySelector(".card__delete-button")

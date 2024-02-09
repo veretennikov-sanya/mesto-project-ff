@@ -15,10 +15,10 @@ export function closeModal(popup) {
 }
 
 function pressEsc(evt) {
-  if (evt.keyCode === 27) {
-    const windows = document.querySelector(".popup_is-opened");
-    if (windows) {
-      closeModal(windows);
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closeModal(openedPopup);
     }
   }
 }

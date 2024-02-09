@@ -14,7 +14,7 @@ const editBtn = document.querySelector(".profile__edit-button");
 const editPopup = document.querySelector(".popup_type_edit");
 const plusBtn = document.querySelector(".profile__add-button");
 const createCardPopup = document.querySelector(".popup_type_new-card");
-const popupElement = document.querySelector(".popup_type_image");
+const popupImage = document.querySelector(".popup_type_image");
 const formElementProfile = document.forms["edit-profile"];
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_description");
@@ -26,8 +26,11 @@ const linkInput = document.querySelector(".popup__input_type_url");
 const allCards = document.querySelector(".places__list");
 
 //MODAL открытие и закрытие....................................................
+
 editBtn.addEventListener("click", function (evt) {
   evt.stopPropagation();
+  nameInput.value = document.querySelector(".profile__title").textContent;
+  jobInput.value = document.querySelector(".profile__description").textContent;
   openModal(editPopup);
 });
 
@@ -53,7 +56,9 @@ function handleCardFormSubmit(evt) {
     name: placeInput.value,
     link: linkInput.value,
   };
-  allCards.prepend(generateNewCard(card, deleteCard, likeAnimation, popupImg));
+  allCards.prepend(
+    generateNewCard(card, deleteCard, likeAnimation, openPopupImg)
+  );
   formElementCard.reset();
   closeModal(evt.target.closest(".popup"));
 }
@@ -61,12 +66,12 @@ formElementCard.addEventListener("submit", handleCardFormSubmit);
 
 // @todo: Вывести карточки на страницу.........................................
 initialCards.forEach((card) => {
-  cards.append(generateNewCard(card, deleteCard, likeAnimation, popupImg));
+  cards.append(generateNewCard(card, deleteCard, likeAnimation, openPopupImg));
 });
 
-function popupImg(card) {
-  popupElement.querySelector(".popup__image").src = card.link;
-  popupElement.querySelector(".popup__image").alt = card.name;
-  popupElement.querySelector(".popup__caption").textContent = card.name;
-  openModal(popupElement);
+function openPopupImg(card) {
+  popupImage.querySelector(".popup__image").src = card.link;
+  popupImage.querySelector(".popup__image").alt = card.name;
+  popupImage.querySelector(".popup__caption").textContent = card.name;
+  openModal(popupImage);
 }
